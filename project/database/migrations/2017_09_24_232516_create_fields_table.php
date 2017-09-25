@@ -14,7 +14,13 @@ class CreateFieldsTable extends Migration
     public function up()
     {
         Schema::create('fields', function (Blueprint $table) {
-            $table->increments('id');
+            $table->bigIncrements('id')->index();
+            $table->bigInteger('enclosure_id')->index();
+            $table->string('name');
+            $table->integer('capacity');
+            $table->bigInteger('type_id')->index();
+            $table->timestamp('init_hour');
+            $table->timestamp('end_hour');
             $table->timestamps();
         });
     }
