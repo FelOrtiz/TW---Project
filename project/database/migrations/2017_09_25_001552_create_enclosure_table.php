@@ -19,7 +19,7 @@ class CreateEnclosureTable extends Migration
             $table->string('name');
             $table->string('address');
             $table->string('city_id')->index();
-            $table->string('responsible_rut')->index();
+            $table->bigInteger('responsible_id')->index();
             $table->timestamps();
         });
     }
