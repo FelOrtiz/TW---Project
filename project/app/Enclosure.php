@@ -16,11 +16,16 @@ class Enclosure extends Model
 
     public function city()
     {
-    	return $this->hasOne('App\City','id','id');
+    	return $this->belongsTo('App\City');
     }
 
     public function institution()
     {
     	return $this->belongsTo('App\Institution');
+    }
+
+    public function responsible()
+    {
+        return $this->belongsTo('App\Person', 'responsible_id', 'id');
     }
 }
