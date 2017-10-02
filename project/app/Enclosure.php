@@ -28,4 +28,9 @@ class Enclosure extends Model
     {
         return $this->belongsTo('App\Person', 'responsible_id', 'id');
     }
+
+    public function fields()
+    {
+        return $this->hasMany('App\Field');
+    }
 }
