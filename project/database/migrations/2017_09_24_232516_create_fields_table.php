@@ -19,8 +19,8 @@ class CreateFieldsTable extends Migration
             $table->string('name');
             $table->integer('capacity');
             $table->bigInteger('type_id')->index();
-            $table->timestamp('init_hour');
-            $table->timestamp('end_hour');
+            $table->timestamp('init_hour')->nullable()->default(null);
+            $table->timestamp('end_hour')->nullable()->default(null);
             $table->timestamps();
         });
     }

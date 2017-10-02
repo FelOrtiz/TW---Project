@@ -20,7 +20,7 @@
 		<div class="login-box-body">
 			<p class="login-box-msg">Sign in to start your session</p>
 
-			<form class="form-horizontal" role="form" method="POST" action="{{ route('login') }}">
+			<form role="form" method="POST" action="{{ route('login') }}">
 				{{ csrf_field() }}
 				<div class="form-group has-feedback {{ $errors->has('email') ? ' has-error' : '' }}">
 					<input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}" required autofocus>
@@ -46,11 +46,6 @@
 					</div>
 				</div>
 			</form>
-
-
-			<a href="#">I forgot my password</a><br>
-			<a href="register.html" class="text-center">Register a new membership</a>
-
 		</div>
 	</div>
 

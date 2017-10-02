@@ -16,8 +16,8 @@ class CreateGameTypesTable extends Migration
         Schema::create('game_types', function (Blueprint $table) {
             $table->bigIncrements('id')->index();
             $table->string('name')->unique();
-            $table->integer('capacity',2);
-            $table->integer('duration',1);
+            $table->integer('capacity');
+            $table->integer('duration');
             $table->timestamps();
         });
     }

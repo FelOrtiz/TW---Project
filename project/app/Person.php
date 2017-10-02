@@ -27,4 +27,9 @@ class Person extends Model
     {
         return $this->hasMany('App\Request');
     }
+
+    public function name()
+    {
+        return ucfirst($this->firstname).' '.ucfirst($this->lastname);
+    }
 }
