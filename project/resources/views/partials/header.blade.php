@@ -10,7 +10,15 @@
 
 			<div class="collapse navbar-collapse pull-left" id="navbar-collapse">
 				<ul class="nav navbar-nav">
-					<li class="active"><a href="#">Link <span class="sr-only">(current)</span></a></li>
+					<li class="dropdown">
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown">Instituciones <span class="caret"></span></a>
+						<ul class="dropdown-menu" role="menu">
+							<li><a href="/institution/create"><i class="fa fa-plus"></i> Registrar</a></li>
+							<li><a href="/institution/index"><i class="fa fa-list"></i> Ver Todas</a></li>
+						</ul>
+					</li>
+
+					<li><a href="#">Link <span class="sr-only">(current)</span></a></li>
 					<li><a href="#">Link</a></li>
 					<li class="dropdown">
 						<a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <span class="caret"></span></a>

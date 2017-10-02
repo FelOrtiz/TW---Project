@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateGameTypesTable extends Migration
+class CreateFieldsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,14 @@ class CreateGameTypesTable extends Migration
      */
     public function up()
     {
-        Schema::create('game_types', function (Blueprint $table) {
+        Schema::create('fields', function (Blueprint $table) {
             $table->bigIncrements('id')->index();
-            $table->string('name')->unique();
+            $table->bigInteger('enclosure_id')->index();
+            $table->string('name');
             $table->integer('capacity');
-            $table->integer('duration');
+            $table->bigInteger('type_id')->index();
+            $table->timestamp('init_hour')->nullable()->default(null);
+            $table->timestamp('end_hour')->nullable()->default(null);
             $table->timestamps();
         });
     }
@@ -29,6 +32,6 @@ class CreateGameTypesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('game_types');
+        Schema::dropIfExists('fields');
     }
 }
