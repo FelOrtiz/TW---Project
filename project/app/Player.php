@@ -11,16 +11,16 @@ class Player extends Model
      *
      * @var array
      */
-    protected $fillable = ['person_rut', 'team_id', 'team_responsible'];
+    protected $fillable = ['person_id', 'team_id', 'team_responsible'];
 
     public function team()
     {
-        return $this->hasOne('App\Team', 'id', 'team_id');
+        return $this->belongsTo('App\Team');
     }
 
     public function person()
     {
-        return $this->hasOne('App\Person', 'rut', 'person_rut');
+        return $this->hasOne('App\Person', 'id', 'person_id');
     }
 
 }

@@ -20,7 +20,7 @@ class Match extends Model
 
     public function l_team()
     {
-        return $this->hasOne('App\User', 'id', 'l_team_id');
+        return $this->hasOne('App\Team', 'id', 'l_team_id');
     }
 
     public function request()

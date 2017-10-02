@@ -13,7 +13,7 @@ class GameType extends Model
      */
     protected $fillable = ['name', 'capacity', 'duration'];
 
-    public function players_tw()
+    public function players_wt()
     {
         return $this->hasMany('App\PlayerWT');
     }
