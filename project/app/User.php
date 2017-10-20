@@ -14,16 +14,24 @@ class User extends Authenticatable
      *
      * @var array
      */
-    protected $fillable = [
-        'name', 'email', 'password',
-    ];
+    protected $fillable = ['email', 'password', 'role_id'];
 
     /**
      * The attributes that should be hidden for arrays.
      *
      * @var array
      */
-    protected $hidden = [
-        'password', 'remember_token',
-    ];
+    protected $hidden = ['password', 'remember_token'];
+
+    public $incrementing = false;
+
+    public function role()
+    {
+        return $this->belongsTo('App\Role');
+    }
+
+    public function person()
+    {
+        return $this->hasOne('App\User', 'id', 'id');
+    }
 }
