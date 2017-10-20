@@ -17,6 +17,13 @@
 							<li><a href="/institution/index"><i class="fa fa-list"></i> Ver Todas</a></li>
 						</ul>
 					</li>
+					<li class="dropdown">
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown">Recintos <span class="caret"></span></a>
+						<ul class="dropdown-menu" role="menu">
+							<li><a href="/enclosure/create"><i class="fa fa-plus"></i> Registrar</a></li>
+							<li><a href="/enclosure/index"><i class="fa fa-list"></i> Ver Todas</a></li>
+						</ul>
+					</li>
 
 					<li><a href="#">Link <span class="sr-only">(current)</span></a></li>
 					<li><a href="#">Link</a></li>
@@ -58,10 +65,10 @@
 					</li>
 					<li class="dropdown notifications-menu">
 						<a href="#" class="dropdown-toggle" data-toggle="dropdown">
-							<i class="fa fa-user" style="margin-right: 5px;"></i> {{ Auth::user()->email }}
+							<i class="fa fa-user" style="margin-right: 5px;"></i>
 						</a>
 						<ul class="dropdown-menu">
-							<li class="header text-center">Rol: {{ ucwords(Auth::user()->role->name) }}</li>
+							<li class="header text-center"></li>
 							<li style="height: auto;">
 								<ul class="menu" style="height: auto;">
 	                            	<li>
