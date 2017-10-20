@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Auth\Events\Registered;
 
 use App\Role;
+use App\City;
 
 trait RegistersUsers
 {
@@ -20,8 +21,9 @@ trait RegistersUsers
     public function showRegistrationForm()
     {
         $roles = Role::all();
+        $cities = City::all();
 
-        return view('auth.register', compact('roles'));
+        return view('auth.register', compact('roles', 'cities'));
     }
 
     /**
