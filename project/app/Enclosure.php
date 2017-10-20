@@ -16,12 +16,12 @@ class Enclosure extends Model
 
     public function city()
     {
-    	return $this->belongsTo('App\City');
+    	return $this->belongsTo('App\City', 'city_id', 'id');
     }
 
     public function institution()
     {
-    	return $this->belongsTo('App\Institution');
+    	return $this->belongsTo('App\Institution', 'institution_id', 'id');
     }
 
     public function responsible()
@@ -33,4 +33,5 @@ class Enclosure extends Model
     {
         return $this->hasMany('App\Field');
     }
+
 }

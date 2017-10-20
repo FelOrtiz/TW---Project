@@ -29,3 +29,11 @@ POST 	delete 	-> método que elimina un registro de la base de datos
 Route::get('institution/index', 'InstitutionController@index');
 Route::get('institution/create', 'InstitutionController@create');
 Route::post('institution', 'InstitutionController@store'); 
+
+//Enclosure
+Route::get('enclosure/index', 'EnclosureController@index');
+Route::get('enclosure/create','EnclosureController@create');
+Route::post('enclosure', 'EnclosureController@store'); 
+Route::get('enclosure/{enclosure}/edit' ,'EnclosureController@edit');
+Route::post('enclosure/update/{enclosure}', 'EnclosureController@update');
+Route::get('enclosure/{enclosure}','EnclosureController@destroy');
