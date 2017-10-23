@@ -110,10 +110,11 @@ class EnclosureController extends Controller
         return redirect('enclosure/index');
     }
 
-    public function destroy($enclosure)
+    public function delete(Enclosure $enclosure)
     {
-        Enclosure::destroy($enclosure);
+        $enclosure->delete();
 
+        //si no hay fallo, retornar mensaje de éxito.
         session()->flash('title', '¡Éxito!');
         session()->flash('message', 'El recinto se ha eliminado exitosamente!');
         session()->flash('icon', 'fa-check');

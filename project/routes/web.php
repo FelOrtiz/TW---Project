@@ -36,4 +36,4 @@ Route::get('enclosure/create','EnclosureController@create');
 Route::post('enclosure', 'EnclosureController@store'); 
 Route::get('enclosure/{enclosure}/edit' ,'EnclosureController@edit');
 Route::post('enclosure/update/{enclosure}', 'EnclosureController@update');
-Route::get('enclosure/{enclosure}','EnclosureController@destroy');
+Route::post('enclosure/delete/{enclosure}','EnclosureController@delete');
