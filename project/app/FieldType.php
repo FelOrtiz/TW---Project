@@ -6,11 +6,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class FieldType extends Model
 {
-
     /**
      * The attributes that are mass assignable.
      *
-     * @var array
      */
     protected $fillable = ['name'];
 
@@ -18,5 +16,4 @@ class FieldType extends Model
     {
     	return $this->hasMany('App\Field');
     }
-
 }
