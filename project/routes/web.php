@@ -37,3 +37,11 @@ Route::post('enclosure', 'EnclosureController@store');
 Route::get('enclosure/{enclosure}/edit' ,'EnclosureController@edit');
 Route::post('enclosure/update/{enclosure}', 'EnclosureController@update');
 Route::get('enclosure/{enclosure}','EnclosureController@destroy');
+
+//Gametype
+Route::get('gametype/index', 'GametypeController@index');
+Route::get('gametype/create', 'GametypeController@create');
+Route::post('gametype', 'GametypeController@store');
+Route::get('gametype/{gametype}/edit', 'GametypeController@edit');
+Route::post('gametype/update/{gametype}', 'GametypeController@update');
+Route::get('gametype/{gametype}', 'GametypeController@destroy');
