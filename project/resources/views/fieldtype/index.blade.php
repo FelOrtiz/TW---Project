@@ -4,7 +4,7 @@
 <div class="container">
 	<section class="content-header">
 		<h1>
-			Recinto
+			Tipo de Cancha
 			<small>Todos</small>
 		</h1>
 		<ol class="breadcrumb">
@@ -29,25 +29,17 @@
 				<table id="table" class="table table-striped">
 					<thead>
 						<tr>
-							<th>Nombre</th>
-							<th>Institución</th>
-							<th>Ciudad</th>
-							<th>Dirección</th>
-							<th>Responsable</th>
+							<th>Tipo</th>
 							<th class="no-sort">Acciones</th>
 						</tr>
 					</thead>
 					<tbody>
-						@foreach($enclosures as $enclosure)
+						@foreach($field_types as $fieldtype)
 						<tr>
-							<td>{{ ucfirst($enclosure->name) }}</td>
-							<td>{{ $enclosure->institution->name }}</td>
-							<td>{{ $enclosure->city->name }}</td>
-							<td>{{ ucfirst($enclosure->address) }}</td>
-							<td>{{ $enclosure->responsible->name() }}</td>
+							<td>{{ ucfirst($fieldtype->name) }}</td>
 							<td>
-								<a href="/enclosure/{{ $enclosure->id }}/edit" class="btn btn-warning btn-xs">Editar</a>
-								<button onclick="delete_enc('{{ $enclosure->id }}')" class="btn btn-danger btn-xs">Eliminar</button>
+								<a href="/fieldtype/{{ $fieldtype->id }}/edit" class="btn btn-warning btn-xs">Editar</a>
+								<button onclick="delete_field('{{ $fieldtype->id }}')" class="btn btn-danger btn-xs">Eliminar</button>
 							</td>
 						</tr>
 						@endforeach
@@ -69,12 +61,12 @@
 		<div class="modal-content">
 			<div class="modal-header">
 				<button type="button" class="close" data-dismiss="modal">&times;</button>
-				<h4 class="modal-title">Eliminar Recinto</h4>
+				<h4 class="modal-title">Eliminar Tipo de Cancha</h4>
 			</div>
 			<form id="form-delete" method="POST" role="form">
 			{{ csrf_field() }}
 			<div class="modal-body">
-				<p> Desea eliminar el recinto?</p>
+				<p> Desea eliminar el tipo de Cancha?</p>
 			</div>
 			<div class="modal-footer">
 				<button type="submit" class="btn btn-danger pull-left" >Si, eliminar</button>
@@ -96,8 +88,8 @@
 <script src="{{ asset('plugins/datatables/datatables.min.js') }}"></script>	
 
 <script>
-	function delete_enc(id){
-		$('#form-delete').attr('action', '/enclosure/delete/'+id);
+	function delete_field(id){
+		$('#form-delete').attr('action', '/fieldtype/delete/'+id);
 		$('#DeleteModal').modal('toggle');
 	};
 </script>
