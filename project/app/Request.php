@@ -20,6 +20,6 @@ class Request extends Model
 
     public function field()
     {
-    	return $this->belongsTo('App\Field');
+    	return $this->belongsTo('App\Field', 'field_id', 'id');
     }
 }

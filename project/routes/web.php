@@ -29,6 +29,9 @@ POST 	delete 	-> método que elimina un registro de la base de datos
 Route::get('institution/index', 'InstitutionController@index');
 Route::get('institution/create', 'InstitutionController@create');
 Route::post('institution', 'InstitutionController@store'); 
+Route::get('institution/{institution}/edit', 'InstitutionController@edit');
+Route::post('institution/update/{institution}', 'InstitutionController@update');
+Route::post('institution/delete/{institution}','InstitutionController@delete');
 
 //Enclosure
 Route::get('enclosure/index', 'EnclosureController@index');
@@ -37,3 +40,11 @@ Route::post('enclosure', 'EnclosureController@store');
 Route::get('enclosure/{enclosure}/edit' ,'EnclosureController@edit');
 Route::post('enclosure/update/{enclosure}', 'EnclosureController@update');
 Route::get('enclosure/{enclosure}','EnclosureController@destroy');
+
+//Field
+Route::get('field/index', 'FieldController@index');
+Route::get('field/create', 'FieldController@create');
+Route::post('field', 'FieldController@store');
+Route::get('field/{field}/edit', 'FieldController@edit');
+Route::post('field/update/{field}', 'FieldController@update');
+Route::post('field/delete/{field}', 'FieldController@delete');
