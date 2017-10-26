@@ -41,6 +41,7 @@ Route::get('enclosure/{enclosure}/edit' ,'EnclosureController@edit');
 Route::post('enclosure/update/{enclosure}', 'EnclosureController@update');
 Route::post('enclosure/delete/{enclosure}','EnclosureController@delete');
 
+
 //Field
 Route::get('field/index', 'FieldController@index');
 Route::get('field/create', 'FieldController@create');
@@ -50,10 +51,11 @@ Route::post('field/update/{field}', 'FieldController@update');
 Route::post('field/delete/{field}', 'FieldController@delete');
 
 
+
 //FieldType
 Route::get('fieldtype/index', 'FieldTypeController@index');
 Route::get('fieldtype/create','FieldTypeController@create');
 Route::post('fieldtype', 'FieldTypeController@store'); 
 Route::get('fieldtype/{fieldtype}/edit' ,'FieldTypeController@edit');
 Route::post('fieldtype/update/{fieldtype}', 'FieldTypeController@update');
-Route::post('fieldtype/delete/{fieldtype}','FieldTypeController@delete');
+
