@@ -58,4 +58,8 @@ Route::get('fieldtype/create','FieldTypeController@create');
 Route::post('fieldtype', 'FieldTypeController@store'); 
 Route::get('fieldtype/{fieldtype}/edit' ,'FieldTypeController@edit');
 Route::post('fieldtype/update/{fieldtype}', 'FieldTypeController@update');
+Route::post('fieldtype/delete/{fieldtype}', 'FieldTypeController@delete');
 
+
+//Request
+Route::get('request/index', 'RequestController@index');
