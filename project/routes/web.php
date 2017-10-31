@@ -45,3 +45,6 @@ Route::post('gametype', 'GametypeController@store');
 Route::get('gametype/{gametype}/edit', 'GametypeController@edit');
 Route::post('gametype/update/{gametype}', 'GametypeController@update');
 Route::get('gametype/{gametype}', 'GametypeController@destroy');
+
+//Solicitation
+Route::get('solicitation/index', 'SolicitationController@index');

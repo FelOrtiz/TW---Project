@@ -18,8 +18,13 @@ class Field extends Model
     	return $this->belongsTo('App\FieldType');
     }
 
-    public function request()
+    public function solicitation()
     {
-    	return $this->belongsTo('App\Request');
+    	return $this->belongsTo('App\Solicitation');
+    }
+
+    public function name()
+    {
+        return ucfirst($this->name);
     }
 }
