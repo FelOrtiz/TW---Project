@@ -29,6 +29,9 @@ POST 	delete 	-> método que elimina un registro de la base de datos
 Route::get('institution/index', 'InstitutionController@index');
 Route::get('institution/create', 'InstitutionController@create');
 Route::post('institution', 'InstitutionController@store'); 
+Route::get('institution/{institution}/edit', 'InstitutionController@edit');
+Route::post('institution/update/{institution}', 'InstitutionController@update');
+Route::post('institution/delete/{institution}','InstitutionController@delete');
 
 //Enclosure
 Route::get('enclosure/index', 'EnclosureController@index');
@@ -48,3 +51,26 @@ Route::get('gametype/{gametype}', 'GametypeController@destroy');
 
 //Solicitation
 Route::get('solicitation/index', 'SolicitationController@index');
+
+
+//Field
+Route::get('field/index', 'FieldController@index');
+Route::get('field/create', 'FieldController@create');
+Route::post('field', 'FieldController@store');
+Route::get('field/{field}/edit', 'FieldController@edit');
+Route::post('field/update/{field}', 'FieldController@update');
+Route::post('field/delete/{field}', 'FieldController@delete');
+
+
+
+//FieldType
+Route::get('fieldtype/index', 'FieldTypeController@index');
+Route::get('fieldtype/create','FieldTypeController@create');
+Route::post('fieldtype', 'FieldTypeController@store'); 
+Route::get('fieldtype/{fieldtype}/edit' ,'FieldTypeController@edit');
+Route::post('fieldtype/update/{fieldtype}', 'FieldTypeController@update');
+Route::post('fieldtype/delete/{fieldtype}', 'FieldTypeController@delete');
+
+
+//Request
+Route::get('request/index', 'RequestController@index');
