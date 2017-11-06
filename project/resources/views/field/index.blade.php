@@ -1,10 +1,10 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
+<div class='container'>
 	<section class="content-header">
 		<h1>
-			Institución
+			Cancha
 			<small>Todas</small>
 		</h1>
 		<ol class="breadcrumb">
@@ -24,26 +24,33 @@
 
 		<div class="box box-primary">
 			<div class="box-header with-border">
-				<h3 class="box-title">Todas las instituciones</h3>
+				<h3 class="box-title">Todas las canchas</h3>
 			</div>
 			<div class="box-body">
-				<table id="table" class="table">
+				<table id=table class="table">
 					<thead>
 						<tr>
 							<th>Nombre</th>
-							<th>Responsable</th>
-							<th>Creación</th>
+							<th>Recinto</th>
+							<th>Capacidad</th>
+							<th>Tipo</th>
+							<th>Hora inicio</th>
+							<th>Hora termino</th>
 						</tr>
 					</thead>
 					<tbody>
-						@foreach($institutions as $institution)
+						@foreach($fields as $field)
+
 						<tr>
-							<td>{{ ucfirst($institution->name) }}</td>
-							<td>{{ $institution->responsible->name() }}</td>
-							<td>{{ $institution->created_at->diffForHumans() }}</td>
+							<td>{{ ucfirst($field->name) }}</td>
+							<td>{{ $field->enclosures->name }}</td>
+							<td>{{ ucfirst($field->capacity) }}</td>
+							<td>{{ $field->fieldType->name }}</td>
+							<td>{{ $field->init_hour }}</td>
+							<td>{{ $field->end_hour }}</td>
 							<td>
-								<a href="/institution/{{ $institution->id }}/edit" class="btn btn-warning btn-xs">Editar</a>
-								<button onclick="delete_enc('{{ $institution->id }}')" class="btn btn-danger btn-xs">Eliminar</button>
+								<a href="/field/{{ $field->id }}/edit" class="btn btn-warning btn-xs">Editar</a>
+								<button onclick="delete_enc('{{ $field->id }}')" class="btn btn-danger btn-xs">Eliminar</button>
 							</td>
 						</tr>
 						@endforeach
@@ -65,12 +72,12 @@
 		<div class="modal-content">
 			<div class="modal-header">
 				<button type="button" class="close" data-dismiss="modal">&times;</button>
-				<h4 class="modal-title">Eliminar Institución</h4>
+				<h4 class="modal-title">Eliminar Cancha</h4>
 			</div>
 			<form id="form-delete" method="POST" role="form">
 			{{ csrf_field() }}
 			<div class="modal-body">
-				<p> Desea eliminar la institución?</p>
+				<p> Desea eliminar la cancha?</p>
 			</div>
 			<div class="modal-footer">
 				<button type="submit" class="btn btn-danger pull-left" >Si, eliminar</button>
@@ -93,13 +100,12 @@
 
 <script>
 	function delete_enc(id){
-		$('#form-delete').attr('action', '/institution/delete/'+id);
+		$('#form-delete').attr('action', '/field/delete/'+id);
 		$('#DeleteModal').modal('toggle');
 	};
 </script>
 
 <script>
-
     var table;
 
     $(document).ready(function () {
@@ -140,8 +146,5 @@
             },
         });
     });
-
 </script>
-
-
 @endsection

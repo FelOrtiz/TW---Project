@@ -22,7 +22,7 @@
 		</div>
 		@endif
 
-		<div class="box box-success">
+		<div class="box box-warning">
 			<div class="box-header with-border">
 				<h3 class="box-title">Editar Recinto</h3>
 			</div>
@@ -105,7 +105,7 @@
 				</div>
 				<div class="box-footer">
 					<a href="/" class="btn btn-default btn-flat">Volver</a>
-					<button type="submit" class="btn btn-success btn-flat pull-right">Editar Recinto </button>
+					<button type="submit" class="btn btn-warning btn-flat pull-right">Editar Recinto </button>
 				</div>
 			</form>
 		</div>
