@@ -36,8 +36,6 @@
 					<li><a href="#">Crear equipo</a></li>
 					<li><a href="#">Buscar equipo</a></li>
 					@endif
-					<li><a href="#">Link <span class="sr-only">(current)</span></a></li>
-					<li><a href="#">Link</a></li>
 					<li class="dropdown">
 						<a href="#" class="dropdown-toggle" data-toggle="dropdown">Acerca de <span class="caret"></span></a>
 						<ul class="dropdown-menu" role="menu">
