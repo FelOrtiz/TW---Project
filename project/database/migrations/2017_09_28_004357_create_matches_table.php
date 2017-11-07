@@ -17,7 +17,7 @@ class CreateMatchesTable extends Migration
             $table->bigIncrements('id')->index();
             $table->bigInteger('v_team_id')->index();
             $table->bigInteger('l_team_id')->index();
-            $table->bigInteger('request_id')->index();
+            $table->bigInteger('solicitation_id')->index();
             $table->timestamps();
         });
     }

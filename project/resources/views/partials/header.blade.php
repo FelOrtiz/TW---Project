@@ -2,7 +2,7 @@
 	<nav class="navbar navbar-static-top">
 		<div class="container">
 			<div class="navbar-header">
-				<a href="../../home" class="navbar-brand"><b>Admin</b>GDC</a>
+				<a href="/" class="navbar-brand"><b>Gestión</b> Canchas</a>
 				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse">
 					<i class="fa fa-bars"></i>
 				</button>
@@ -10,6 +10,7 @@
 
 			<div class="collapse navbar-collapse pull-left" id="navbar-collapse">
 				<ul class="nav navbar-nav">
+					@if(\Auth::user()->isAdmin())
 					<li class="dropdown">
 						<a href="#" class="dropdown-toggle" data-toggle="dropdown">Instituciones <span class="caret"></span></a>
 						<ul class="dropdown-menu" role="menu">
@@ -25,12 +26,18 @@
 						</ul>
 					</li>
 					<li class="dropdown">
-						<a href="#" class="dropdown-toggle" data-toggle="dropdown">Tipos de Juego <span class="caret"></span></a>
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown">Canchas <span class="caret"></span></a>
 						<ul class="dropdown-menu" role="menu">
-							<li><a href="/gametype/create"><i class="fa fa-plus"></i> Registrar</a></li>
-							<li><a href="/gametype/index"><i class="fa fa-list"></i> Ver Todos</a></li>
+							<li><a href="/field/create"><i class="fa fa-plus"></i> Registrar</a></li>
+							<li><a href="/field/index"><i class="fa fa-list"></i> Ver Todas</a></li>
 						</ul>
 					</li>
+					@elseif(\Auth::user()->isPlayer())
+					<li><a href="#">Crear equipo</a></li>
+					<li><a href="#">Buscar equipo</a></li>
+					@endif
+					<li><a href="#">Link <span class="sr-only">(current)</span></a></li>
+					<li><a href="#">Link</a></li>
 					<li class="dropdown">
 						<a href="#" class="dropdown-toggle" data-toggle="dropdown">Acerca de <span class="caret"></span></a>
 						<ul class="dropdown-menu" role="menu">

@@ -45,3 +45,8 @@ $RECYCLE.BIN/
 Network Trash Folder
 Temporary Items
 .apdisk
+project/resources/views/partials/header.blade.php
+project/vendor/composer/autoload_static.php
+project/resources/views/partials/header.blade.php
+project/resources/views/partials/header.blade.php
+project/routes/web.php

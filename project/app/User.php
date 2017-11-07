@@ -34,4 +34,24 @@ class User extends Authenticatable
     {
         return $this->hasOne('App\Person', 'id', 'id');
     }
+
+    public function isAdmin()
+    {
+        if($this->role->id == 1)
+        {
+            return true;
+        }
+
+        return false;
+    }
+
+    public function isPlayer()
+    {
+        if($this->role->id == 2)
+        {
+            return true;
+        }
+        
+        return false;
+    }
 }

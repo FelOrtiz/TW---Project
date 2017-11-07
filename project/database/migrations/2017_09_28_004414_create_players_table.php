@@ -14,7 +14,7 @@ class CreatePlayersTable extends Migration
     public function up()
     {
         Schema::create('players', function (Blueprint $table) {
-            $table->string('person_rut')->index();
+            $table->bigInteger('person_id')->index();
             $table->bigInteger('team_id')->index();
             $table->boolean('team_responsible');
             $table->timestamps();

@@ -41,6 +41,10 @@
 							<td>{{ ucfirst($institution->name) }}</td>
 							<td>{{ $institution->responsible->name() }}</td>
 							<td>{{ $institution->created_at->diffForHumans() }}</td>
+							<td>
+								<a href="/institution/{{ $institution->id }}/edit" class="btn btn-warning btn-xs">Editar</a>
+								<button onclick="delete_enc('{{ $institution->id }}')" class="btn btn-danger btn-xs">Eliminar</button>
+							</td>
 						</tr>
 						@endforeach
 					</tbody>
@@ -52,6 +56,32 @@
 		</div>
 	</section>
 </div>
+
+@section('modals')
+<!-- Modal -->
+<div class="modal fade" id="DeleteModal" role="dialog">
+	<div class="modal-dialog">
+		<!-- Modal content-->
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+				<h4 class="modal-title">Eliminar Institución</h4>
+			</div>
+			<form id="form-delete" method="POST" role="form">
+			{{ csrf_field() }}
+			<div class="modal-body">
+				<p> Desea eliminar la institución?</p>
+			</div>
+			<div class="modal-footer">
+				<button type="submit" class="btn btn-danger pull-left" >Si, eliminar</button>
+				<button type="button" class="btn btn-default pull-rigth" data-dismiss="modal">No, Cancelar</button>
+			</div>
+			</form>
+		</div>
+
+	</div>
+</div>
+@endsection
 @endsection
 
 @section('style')
@@ -62,6 +92,14 @@
 <script src="{{ asset('plugins/datatables/datatables.min.js') }}"></script>	
 
 <script>
+	function delete_enc(id){
+		$('#form-delete').attr('action', '/institution/delete/'+id);
+		$('#DeleteModal').modal('toggle');
+	};
+</script>
+
+<script>
+
     var table;
 
     $(document).ready(function () {
@@ -102,5 +140,8 @@
             },
         });
     });
+
 </script>
+
+
 @endsection

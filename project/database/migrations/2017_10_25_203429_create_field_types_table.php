@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateFieldtypeTable extends Migration
+class CreateFieldTypesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateFieldtypeTable extends Migration
      */
     public function up()
     {
-        Schema::create('fieldtype', function (Blueprint $table) {
+        Schema::create('field_types', function (Blueprint $table) {
             $table->bigIncrements('id')->index();
             $table->string('name')->unique();
             $table->timestamps();
@@ -27,6 +27,6 @@ class CreateFieldtypeTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('fieldtype');
+        Schema::dropIfExists('field_types');
     }
 }

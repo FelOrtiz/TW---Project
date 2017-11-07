@@ -61,4 +61,51 @@ class InstitutionController extends Controller
 
         return redirect('institution/index');        
     }
+
+    public function edit(Institution $institution)
+    {
+        $people = Person::all(); 
+
+        return view('institution.edit', compact('institution','people'));
+    }
+
+    public function update(Request $request, $id)
+    {
+       //validar la petición
+        $validator = Validator::make($request->all(), [
+            'name' => 'required|string|min:3|max:50',
+            'responsible_id' => 'required|numeric'
+        ]);
+
+        //si hay fallo, retornar a la vista con los fallos
+        if ($validator->fails()) 
+        {
+            return redirect('institution/edit')->withErrors($validator)->withInput();
+        }
+
+        //Editando la institución
+        $institution = Institution::find($id);
+        $institution->update($request->except ('_token'));
+
+
+        //si no hay fallo, retornar mensaje de éxito.
+        session()->flash('title', '¡Éxito!');
+        session()->flash('message', 'La institution se ha editado exitosamente!');
+        session()->flash('icon', 'fa-check');
+        session()->flash('type', 'success');
+
+        return redirect('institution/index');
+    }
+
+    public function delete(Institution $institution)
+    {
+        $institution->delete();
+
+        session()->flash('title', '¡Éxito!');
+        session()->flash('message', 'La institución se ha eliminado exitosamente!');
+        session()->flash('icon', 'fa-check');
+        session()->flash('type', 'success');
+
+        return redirect('institution/index'); 
+    }
 }

@@ -10,12 +10,12 @@ class Field extends Model
 
     public function enclosures()
     {
-    	return $this->belongsTo('App\Enclosure');
+    	return $this->belongsTo('App\Enclosure', 'enclosure_id', 'id');
     }
 
     public function fieldType()
     {
-    	return $this->belongsTo('App\FieldType');
+    	return $this->belongsTo('App\FieldType', 'type_id', 'id');
     }
 
     public function solicitation()
