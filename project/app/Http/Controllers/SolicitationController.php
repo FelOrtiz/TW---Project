@@ -38,4 +38,16 @@ class SolicitationController extends Controller
 
     	return view('solicitation.index')->with( compact('response'));
     }
+
+    public function destroy($solicitation)
+    {
+        GameType::destroy($solicitation);
+
+        session()->flash('title', '¡Éxito!');
+        session()->flash('message', 'La solicitud se ha eliminado exitosamente!');
+        session()->flash('icon', 'fa-check');
+        session()->flash('type', 'success');
+
+        return redirect('solicitation/index'); 
+    }
 }

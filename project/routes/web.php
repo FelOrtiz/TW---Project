@@ -13,7 +13,7 @@
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/home/{user}', 'HomeController@index')->name('home');
 Route::get('/', 'HomeController@index');
 
 /*
@@ -48,3 +48,4 @@ Route::get('gametype/{gametype}', 'GametypeController@destroy');
 
 //Solicitation
 Route::get('solicitation/index', 'SolicitationController@index');
+Route::get('solicitation/{solicitation}', 'SolicitationController@destroy');
