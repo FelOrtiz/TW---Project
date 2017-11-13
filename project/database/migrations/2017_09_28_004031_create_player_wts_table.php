@@ -28,6 +28,6 @@ class CreatePlayerWTsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('player_w_ts');
+        Schema::dropIfExists('player_wts');
     }
 }

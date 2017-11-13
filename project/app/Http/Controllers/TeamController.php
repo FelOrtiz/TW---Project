@@ -10,6 +10,7 @@ use App\Team;
 use App\Person;
 use App\City;
 use App\GameType;
+use App\PlayerWT;
 
 class TeamController extends Controller
 {
@@ -18,7 +19,7 @@ class TeamController extends Controller
         $this->middleware('auth');
     }
 
-    //retorna todos los recintos
+    //retorna todos los 
     public function index()
     {
     	$teams = Team::all();
@@ -78,6 +79,21 @@ class TeamController extends Controller
         return view('team.edit', compact('team','cities','gametypes'));
     }
 
+    public function players(Team $team)
+    { 
+        $players = Person::all();
+        return view('team.players',compact('team','players'));
+    }
+
+    public function addplayers(Request $request)
+    {
+        Player::create([
+            'person_rut'=> $request['id'],
+            'team_id' => $request['id'],
+            'team_responsible' => auth()->user()->id
+        ]);
+    }
+
     public function update(Request $request, $id)
     {
         //validar la petición
@@ -117,5 +133,26 @@ class TeamController extends Controller
         session()->flash('type', 'success');
 
         return redirect('team/index');
+    }
+
+    public function search_player(Request $request)
+    {
+
+        $playerwts = PlayerWT::all();
+        
+        foreach ($playerwts as $playerwt) {
+
+            $person = Person::find($playerwt->person_id);
+            dd($person->city_id,$playerwt->hour,$playerwt->gametype_id);
+
+            if($person->city_id == $request->city_id && 
+                $playerwt->hour == $request->init_hour &&
+                $playerwt->gametype_id == $request->gametype_id){
+
+                
+            }
+
+ 
+        }
     }
 }

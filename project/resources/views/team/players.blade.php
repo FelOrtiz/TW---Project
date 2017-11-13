@@ -1,15 +1,16 @@
 @extends('layouts.app')
 
 @section('content')
+
 <div class="container">
 	<section class="content-header">
 		<h1>
-			Equipo
-			<small>Todos</small>
+			Completar equipo
+			<small>Jugadores</small>
 		</h1>
 		<ol class="breadcrumb">
 			<li><a href="/"><i class="fa fa-home"></i> Home</a></li>
-			<li class="active">Todos</li>
+			<li class="active">Jugadores</li>
 		</ol>
 	</section>
 
@@ -23,71 +24,35 @@
 		@endif
 		<div class="box box-primary">
 			<div class="box-header with-border">
-				<h3 class="box-title">Todos los Equipos</h3>
+				<h3 class="box-title">Todos los Jugadores</h3>
+				<div class="pull-right box-tools ">
+
+					<button id="search" type="button" class="btn btn-primary btn-md">
+					Buscar </button>
+
+					<button id="stop" type="button" class="btn btn-danger btn-md" disabled>Cancelar </button>
+
+					
+				</div>	
 			</div>
 			<div class="box-body">
-				<table id="table" class="table table-striped">
+				<table id="table2" class="table table-striped">
 					<thead>
 						<tr>
-							<th>Nombre Responsable</th>
-							<th>Tipo De Juego</th>
-							<th>Ciudad</th>
-							<th>Estado</th>
-							<th>Inicio de ?</th>
+							<th>Nombre Jugador</th>
 							<th class="no-sort">Acciones</th>
 						</tr>
 					</thead>
 					<tbody>
-						@foreach($teams as $team)
-						<tr>
-							<td>{{ $team->responsible->name() }}</td>
-							<td>{{ $team->gametype->name() }}</td>
-							<td>{{ $team->city->name() }}</td>
-							<td>{{ ucfirst($team->complete) }}</td>
-							<td>{{ ucfirst($team->init_hour)}}</td>
-							<td>
-								<a href="/team/{{ $team->id }}/edit" class="btn btn-warning btn-xs">Editar</a>
-								<button onclick="delete_team('{{ $team->id }}')" class="btn btn-danger btn-xs">Eliminar</button>
-								<a href="/team/{{ $team->id}}/players" class="btn btn-primary btn-xs">Agregar Jugadores</a>
-							</td>
-						</tr>
-						@endforeach
 					</tbody>
 				</table>
-			</div>
-			<div class="box-footer">
-				<a href="/" class="btn btn-default btn-flat">Volver</a>
 			</div>
 		</div>
 	</section>
 </div>
-
-@section('modals')
-<!-- Modal -->
-<div class="modal fade" id="DeleteModal" role="dialog">
-	<div class="modal-dialog">
-		<!-- Modal content-->
-		<div class="modal-content">
-			<div class="modal-header">
-				<button type="button" class="close" data-dismiss="modal">&times;</button>
-				<h4 class="modal-title">Eliminar Equipo</h4>
-			</div>
-			<form id="form-delete" method="POST" role="form">
-			{{ csrf_field() }}
-			<div class="modal-body">
-				<p> Desea eliminar el equipo?</p>
-			</div>
-			<div class="modal-footer">
-				<button type="submit" class="btn btn-danger pull-left" >Si, eliminar</button>
-				<button type="button" class="btn btn-default pull-rigth" data-dismiss="modal">No, Cancelar</button>
-			</div>
-			</form>
-		</div>
-
-	</div>
-</div>
 @endsection
-@endsection
+
+
 
 @section('style')
 <link rel="stylesheet" href="{{ asset('plugins/datatables/datatables.min.css') }}"/>
@@ -97,10 +62,32 @@
 <script src="{{ asset('plugins/datatables/datatables.min.js') }}"></script>	
 
 <script>
-	function delete_team(id){
-		$('#form-delete').attr('action', '/team/delete/'+id);
-		$('#DeleteModal').modal('toggle');
-	};
+	$('#search').click(function(){
+		$('#search').text("Buscando...");
+		$('#search').append(" <i class='fa fa-refresh fa-spin'></i>");
+		$('#stop').removeAttr("disabled");
+
+		$.ajax({
+            type: 'POST',
+            url: "/searchplayers",
+            data: {
+                '_token':"{{ csrf_token() }}",
+                'init_hour':"{{ $team->init_hour}}",
+                'city_id': "{{ $team->city_id}}",
+                'gametype_id': "{{ $team->gametype_id}}"
+            },
+            success: function(data) {
+                // empty
+            },
+        });
+	});
+</script>
+
+<script>
+	$('#stop').click(function(){
+		$('#stop').attr("disabled", "disabled");
+		$('#search').text("Buscar");
+	});
 </script>
 
 <script>
@@ -145,4 +132,5 @@
 		});
 	});
 </script>
+
 @endsection

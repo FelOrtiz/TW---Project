@@ -81,5 +81,12 @@ Route::get('team/index', 'TeamController@index');
 Route::get('team/create', 'TeamController@create');
 Route::post('team', 'TeamController@store');
 Route::get('team/{team}/edit' ,'TeamController@edit');
+Route::get('team/{team}/players' ,'TeamController@players');
+Route::post('/searchplayers' ,'TeamController@search_player');
+Route::post('' ,'TeamController@add_players');
 Route::post('team/update/{team}', 'TeamController@update');
 Route::post('team/delete/{team}', 'TeamController@delete');
+
+
+//Team Players
+Route::get('players/playerteam', 'PlayerController@complete');
