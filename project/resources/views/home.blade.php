@@ -1,35 +1,32 @@
 @extends('layouts.app')
 
 @section('content')
+
+<div class="row">
+	<div class="wrap">
+		<ul id="pictures">
+			<li title="Fútbol">
+				<img src="{{ asset('img/football.jpg') }}" alt="Fútbol">
+			</li>
+			<li title="Básquetbol">
+				<img src="{{ asset('img/basket.jpg') }}"  alt="Básquetbol">
+			</li>
+			<li title="Tenis">
+				<img src="{{ asset('img/tennis.jpg') }}" alt="Tenis">
+			</li>
+			<li title="Rugby">
+				<img src="{{ asset('img/rugby.jpg') }}" alt="Rugby">
+			</li>
+			<li title="Vóleibol">
+				<img src="{{ asset('img/voley.jpg') }}" alt="Vóleibol">
+			</li>
+		</ul>
+		<h1 class="wrap-title text-center">Gestión Canchas</h1>
+	</div>
+</div>
+<br/>
 <div class="container">
 	<section class="content">
-		<br/>
-		<br/>
-		<div class="row">
-			<div class="col-md-12">
-				<ul id="pictures">
-					<li title="Fútbol">
-						<img src="{{ asset('img/football.jpg') }}" alt="Fútbol" height="50%">
-					</li>
-					<li title="Básquetbol">
-						<img src="{{ asset('img/basket.jpg') }}"  alt="Básquetbol">
-					</li>
-					<li title="Tenis">
-						<img src="{{ asset('img/tennis.jpg') }}" alt="Tenis">
-					</li>
-					<li title="Rugby">
-						<img src="{{ asset('img/rugby.jpg') }}" alt="Rugby">
-					</li>
-					<li title="Vóleibol">
-						<img src="{{ asset('img/voley.jpg') }}" alt="Vóleibol">
-					</li>
-				</ul>
-			</div>
-		</div>
-		<br/>
-		<br/>
-		<br/>
-		<br/>
 		<div class="row">
 			<div class="col-md-3 text-center">
 				<i class="fa fa-calendar fa-4x"></i>
@@ -66,12 +63,12 @@
 $('#pictures').slippry({
   slippryWrapper: '<div class="sy-box pictures-slider" />', // wrapper to wrap everything, including pager
 
-  adaptiveHeight: false, // height of the sliders adapts to current slide
-  captions: false, // Position: overlay, below, custom, false
+  adaptiveHeight: true, // height of the sliders adapts to current slide
+  captions: true, // Position: overlay, below, custom, false
 
   pager: false,
 
-  controls: true,
+  controls: false,
   autoHover: false,
 
   transition: 'kenburns', // fade, horizontal, kenburns, false
