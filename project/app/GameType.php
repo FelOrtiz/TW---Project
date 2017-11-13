@@ -22,4 +22,9 @@ class GameType extends Model
     {
         return $this->hasMany('App\Team');
     }
+
+    public function name()
+    {
+        return ucfirst($this->name);
+    }
 }

@@ -22,4 +22,9 @@ class City extends Model
     {
     	return $this->hasMany('App\Enclosure');
     }
+
+    public function name()
+    {
+        return ucfirst($this->name);
+    }
 }

@@ -74,3 +74,12 @@ Route::post('fieldtype/delete/{fieldtype}', 'FieldTypeController@delete');
 
 //Request
 Route::get('request/index', 'RequestController@index');
+
+
+//Team
+Route::get('team/index', 'TeamController@index');
+Route::get('team/create', 'TeamController@create');
+Route::post('team', 'TeamController@store');
+Route::get('team/{team}/edit' ,'TeamController@edit');
+Route::post('team/update/{team}', 'TeamController@update');
+Route::post('team/delete/{team}', 'TeamController@delete');
