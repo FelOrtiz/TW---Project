@@ -2,25 +2,81 @@
 
 @section('content')
 <div class="container">
-	<section class="content-header">
-		<h1>
-			Mis Recintos
-			<small>Todos</small>
-		</h1>
-		<ol class="breadcrumb">
-			<li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-			<li><a href="#">Recinto</a></li>
-			<li class="active">Mis Recintos</li>
-		</ol>
-	</section>
-
 	<section class="content">
-		
+		<br/>
+		<br/>
+		<div class="row">
+			<div class="col-md-12">
+				<ul id="pictures">
+					<li title="Fútbol">
+						<img src="{{ asset('img/football.jpg') }}" alt="Fútbol" height="50%">
+					</li>
+					<li title="Básquetbol">
+						<img src="{{ asset('img/basket.jpg') }}"  alt="Básquetbol">
+					</li>
+					<li title="Tenis">
+						<img src="{{ asset('img/tennis.jpg') }}" alt="Tenis">
+					</li>
+					<li title="Rugby">
+						<img src="{{ asset('img/rugby.jpg') }}" alt="Rugby">
+					</li>
+					<li title="Vóleibol">
+						<img src="{{ asset('img/voley.jpg') }}" alt="Vóleibol">
+					</li>
+				</ul>
+			</div>
+		</div>
+		<br/>
+		<br/>
+		<br/>
+		<br/>
+		<div class="row">
+			<div class="col-md-3 text-center">
+				<i class="fa fa-calendar fa-4x"></i>
+				<h2>Reservas</h2>
+				<p>Gestiona la reserva para una cancha en un recinto de tu ciudad según la hora de tu preferencia.</p>
+				<br/>
+			</div>
+			<div class="col-md-3 text-center">
+				<i class="fa fa-users fa-4x"></i>
+				<h2>Equipos</h2>
+				<p>Crea un equipo para jugar tu deporte favorito, luego busca jugadores con el mismo criterio y empieza a jugar!</p>
+				<br/>
+			</div>
+			<div class="col-md-3 text-center">
+				<i class="fa fa-soccer-ball-o fa-4x"></i>
+				<h2>A Jugar!</h2>
+				<p>Si deseas jugar tu deporte favorito, pero no tienes equipo. No te preocupes, con esta función podrás buscar equipos incompletos y podrás unirte a ellos.</p>
+				<br/>
+			</div>
+			<div class="col-md-3 text-center">
+				<i class="fa fa-suitcase fa-4x"></i>
+				<h2>Administración</h2>
+				<p>Si eres dueño de una institución, puedes mantener las gestión de sus canchas a través de esta plataforma. Regístrate y compienza!</p>
+				<br/>
+			</div>
+		</div>
 	</section>
 </div>
 @endsection
 
 @section('script')
 
+<script>
+$('#pictures').slippry({
+  slippryWrapper: '<div class="sy-box pictures-slider" />', // wrapper to wrap everything, including pager
 
+  adaptiveHeight: false, // height of the sliders adapts to current slide
+  captions: false, // Position: overlay, below, custom, false
+
+  pager: false,
+
+  controls: true,
+  autoHover: false,
+
+  transition: 'kenburns', // fade, horizontal, kenburns, false
+  kenZoom: 140,
+  speed: 2000 // time the transition takes (ms)
+});
+</script>
 @endsection
