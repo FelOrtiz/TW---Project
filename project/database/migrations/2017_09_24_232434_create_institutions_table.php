@@ -16,7 +16,7 @@ class CreateInstitutionsTable extends Migration
         Schema::create('institutions', function (Blueprint $table) {
             $table->bigIncrements('id')->index();
             $table->string('name');
-            $table->string('responsible_id')->index();
+            $table->bigInteger('responsible_id')->index();
             $table->timestamps();
         });
     }
