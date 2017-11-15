@@ -11,7 +11,7 @@ class Player extends Model
      *
      * @var array
      */
-    protected $fillable = ['person_id', 'team_id', 'team_responsible'];
+    protected $fillable = ['person_rut', 'team_id', 'team_responsible'];
 
     public function team()
     {
@@ -20,7 +20,7 @@ class Player extends Model
 
     public function person()
     {
-        return $this->hasOne('App\Person', 'id', 'person_id');
+        return $this->hasOne('App\Person', 'id', 'person_rut');
     }
 
 }

@@ -13,9 +13,8 @@ class PlayerController extends Controller
         $this->middleware('auth');
     }
 
-    //retorna todos los 
-    public function complete()
+    public searchTeam()
     {
-    	return view('players.playerteam');
+    	
     }
 }

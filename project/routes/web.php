@@ -83,7 +83,7 @@ Route::post('team', 'TeamController@store');
 Route::get('team/{team}/edit' ,'TeamController@edit');
 Route::get('team/{team}/players' ,'TeamController@players');
 Route::post('/searchplayers' ,'TeamController@search_player');
-Route::post('' ,'TeamController@add_players');
+Route::post('/addplayer' ,'TeamController@add_players');
 Route::post('team/update/{team}', 'TeamController@update');
 Route::post('team/delete/{team}', 'TeamController@delete');
 

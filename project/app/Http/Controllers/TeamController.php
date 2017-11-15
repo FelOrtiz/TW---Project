@@ -11,6 +11,7 @@ use App\Person;
 use App\City;
 use App\GameType;
 use App\PlayerWT;
+use App\Player;
 
 class TeamController extends Controller
 {
@@ -37,7 +38,7 @@ class TeamController extends Controller
         return view('team.create', compact('people','cities','gametypes'));
     }
 
-    //método que almacena un nuevo recinto en la BD
+    //método que almacena un equipo en la BD
     public function store(Request $request)
     {
         //validar la petición
@@ -53,10 +54,10 @@ class TeamController extends Controller
             return redirect('team/create')->withErrors($validator)->withInput();
         }
 
-        //creamos la institución
+        //creamos el equipo
         Team::create([
             'responsible_id' => auth()->user()->id,
-            'gametype_id' => $request['city_id'],
+            'gametype_id' => $request['gametype_id'],
             'complete' => 0,
             'city_id' => $request['city_id'],
             'init_hour' => Carbon::parse('now')->modify($request['init_hour'])
@@ -81,18 +82,9 @@ class TeamController extends Controller
 
     public function players(Team $team)
     { 
-        $players = Person::all();
-        return view('team.players',compact('team','players'));
+        return view('team.players',compact('team'));
     }
 
-    public function addplayers(Request $request)
-    {
-        Player::create([
-            'person_rut'=> $request['id'],
-            'team_id' => $request['id'],
-            'team_responsible' => auth()->user()->id
-        ]);
-    }
 
     public function update(Request $request, $id)
     {
@@ -139,20 +131,53 @@ class TeamController extends Controller
     {
 
         $playerwts = PlayerWT::all();
+        $players = array();
         
-        foreach ($playerwts as $playerwt) {
 
-            $person = Person::find($playerwt->person_id);
-            dd($person->city_id,$playerwt->hour,$playerwt->gametype_id);
+        foreach ($playerwts as $player)
+        {
+            $person = Person::find($player->person_id);
 
             if($person->city_id == $request->city_id && 
-                $playerwt->hour == $request->init_hour &&
-                $playerwt->gametype_id == $request->gametype_id){
-
-                
+                $player->hour == $request->init_hour &&
+                $player->gametype_id == $request->gametype_id){
+                array_push($players,$person);               
             }
-
- 
         }
+        $returnHTML = view('partials.tableplayers')->with('players',$players)->render();
+        return response()->json(array('success'=>true, 'html'=>$returnHTML));
+        //return response()->json($players);
+    }
+
+    public function add_players(Request $request)
+    {
+        $gametype = GameType::find($request->gametype_id);
+        $players = Player::where('team_id',"=",$request->team_id)->get();
+        $capacity = ($gametype->capacity)/2 ;
+
+        if (sizeof($players) < $capacity ){
+            
+            //agregar a mi equipo
+            Player::create([
+                'person_rut' => $request->player_id,
+                'team_id' => $request->team_id,
+                'team_responsible' => $request->team_responsible
+                
+            ]);
+
+            //notificar al jugador que fue agregado al equipo
+
+            //eliminar de tabla player_wts
+            $player_wt = PlayerWT::where('person_id',"=",$request->player_id)->delete();
+
+            //ver cuando mi equipo esta completo para modificar el complete  ???
+            $team = Team::find($request->team_id);
+            $team->complete = 1;
+            $team->save();
+        }
+
+        $person = Person::find($request->player_id);
+        return response()->json(array('players' => $players,
+            'capacity'=>$capacity, 'person'=>$person));
     }
 }

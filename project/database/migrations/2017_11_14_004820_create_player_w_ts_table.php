@@ -16,7 +16,7 @@ class CreatePlayerWTsTable extends Migration
         Schema::create('player_wts', function (Blueprint $table) {
             $table->string('person_id')->index();
             $table->bigInteger('gametype_id')->index();
-            $table->time('hour');
+            $table->timestamp('hour')->nullable()->default(null);
             $table->timestamps();
         });
     }

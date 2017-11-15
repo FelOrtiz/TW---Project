@@ -23,32 +23,41 @@
 		@endif
 		<div class="box box-primary">
 			<div class="box-header with-border">
-				<h3 class="box-title">Todos los Equipos</h3>
+				<h3 class="box-title">Mis Equipos</h3>
 			</div>
 			<div class="box-body">
 				<table id="table" class="table table-striped">
 					<thead>
 						<tr>
-							<th>Nombre Responsable</th>
 							<th>Tipo De Juego</th>
 							<th>Ciudad</th>
 							<th>Estado</th>
-							<th>Inicio de ?</th>
+							<th>Fecha de partido</th>
 							<th class="no-sort">Acciones</th>
 						</tr>
 					</thead>
 					<tbody>
 						@foreach($teams as $team)
 						<tr>
-							<td>{{ $team->responsible->name() }}</td>
 							<td>{{ $team->gametype->name() }}</td>
 							<td>{{ $team->city->name() }}</td>
-							<td>{{ ucfirst($team->complete) }}</td>
+
+							@if($team->complete == 0)
+								<td> incompleto </td>
+							@else
+								<td> completo </td>
+							@endif
+
 							<td>{{ ucfirst($team->init_hour)}}</td>
 							<td>
 								<a href="/team/{{ $team->id }}/edit" class="btn btn-warning btn-xs">Editar</a>
 								<button onclick="delete_team('{{ $team->id }}')" class="btn btn-danger btn-xs">Eliminar</button>
-								<a href="/team/{{ $team->id}}/players" class="btn btn-primary btn-xs">Agregar Jugadores</a>
+
+								@if($team->complete == 1)
+									<a href="#" class="btn btn-primary btn-xs" data-toggle="tooltip" title="Equipo completo, ya no se pueden agregar más jugadores." data-placement="right" disabled>Agregar Jugadores</a>
+								@else
+									<a href="/team/{{ $team->id}}/players" class="btn btn-primary btn-xs">Agregar Jugadores</a>
+								@endif
 							</td>
 						</tr>
 						@endforeach
@@ -95,6 +104,12 @@
 
 @section('script')
 <script src="{{ asset('plugins/datatables/datatables.min.js') }}"></script>	
+
+<script>
+	$(function () {
+  		$('[data-toggle="tooltip"]').tooltip()
+	})
+</script>
 
 <script>
 	function delete_team(id){
