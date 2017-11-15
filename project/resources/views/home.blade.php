@@ -21,7 +21,7 @@
 				<img src="{{ asset('img/voley.jpg') }}" alt="Vóleibol">
 			</li>
 		</ul>
-		<h1 class="wrap-title text-center">Gestión Canchas</h1>
+		<h1 class="wrap-title text-center hidden-sm hidden-xs">Gestión Canchas</h1>
 	</div>
 </div>
 <br/>
