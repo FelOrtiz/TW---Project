@@ -35,6 +35,7 @@
 							<th>Fecha</th>
 							<th>Hora de Inicio</th>
 							<th>Duración</th>
+							<th>Acciones</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -45,6 +46,7 @@
 							<td> {{ $solicitation['date'] }}</td>
 							<td> {{ $solicitation['hour'] }}</td>
 							<td> {{ $solicitation['duration'] }}</td>
+							<td> </td>
 						</tr>
 						@endforeach
 					</tbody>
