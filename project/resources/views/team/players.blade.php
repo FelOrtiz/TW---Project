@@ -124,7 +124,8 @@
 	                'init_hour':"{{ $team->init_hour}}",
 	                'city_id': "{{ $team->city_id}}",
 	                'gametype_id': "{{ $team->gametype_id}}",
-	                'team':"{{$team->id}}"
+	                'team':"{{$team->id}}",
+	                'responsible_id':"{{$team->responsible_id}}"
 	            },
 	            success: function(data) {
 	                $('#show_players').html(data.html);

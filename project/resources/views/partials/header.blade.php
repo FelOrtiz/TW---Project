@@ -33,8 +33,8 @@
 						</ul>
 					</li>
 					@elseif(\Auth::user()->isPlayer())
-					<li><a href="#">Crear equipo</a></li>
-					<li><a href="#">Buscar equipo</a></li>
+					<li><a href="/team/create">Crear equipo</a></li>
+					<li><a href="/player/searchteam">Buscar equipo</a></li>
 					@endif
 					<li class="dropdown">
 						<a href="#" class="dropdown-toggle" data-toggle="dropdown">Acerca de <span class="caret"></span></a>

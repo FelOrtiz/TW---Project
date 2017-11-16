@@ -11,17 +11,17 @@ class PlayerWT extends Model
      *
      * @var array
      */
-    protected $fillable = ['person_rut', 'game_type_id', 'hour'];
+    protected $fillable = ['person_id', 'gametype_id', 'hour'];
 
     protected $table = 'player_wts';
 
      public function person()
     {
-        return $this->hasOne('App\Person', 'rut', 'person_rut');
+        return $this->hasOne('App\Person', 'rut', 'person_id');
     }
 
      public function gameType()
     {
-        return $this->hasOne('App\GameType', 'id', 'game_type_id');
+        return $this->hasOne('App\GameType', 'id', 'gametype_id');
     }
 }

@@ -23,7 +23,8 @@ class TeamController extends Controller
     //retorna todos los 
     public function index()
     {
-    	$teams = Team::all();
+    	//$teams = Team::all();
+        $teams = Team::where('responsible_id',"=",auth()->user()->id)->get();
 
     	return view('team.index', compact('teams'));
     }
@@ -140,13 +141,14 @@ class TeamController extends Controller
 
             if($person->city_id == $request->city_id && 
                 $player->hour == $request->init_hour &&
-                $player->gametype_id == $request->gametype_id){
+                $player->gametype_id == $request->gametype_id &&
+                $player->person_id != $request->responsible_id){
                 array_push($players,$person);               
             }
         }
         $returnHTML = view('partials.tableplayers')->with('players',$players)->render();
         return response()->json(array('success'=>true, 'html'=>$returnHTML));
-        //return response()->json($players);
+
     }
 
     public function add_players(Request $request)
@@ -165,11 +167,17 @@ class TeamController extends Controller
                 
             ]);
 
-            //notificar al jugador que fue agregado al equipo
+            //notificar al jugador que fue agregado al equipo.....
+
 
             //eliminar de tabla player_wts
             $player_wt = PlayerWT::where('person_id',"=",$request->player_id)->delete();
 
+            
+        }
+
+        if(sizeof($players) == ($capacity - 1))
+        {
             //ver cuando mi equipo esta completo para modificar el complete  ???
             $team = Team::find($request->team_id);
             $team->complete = 1;

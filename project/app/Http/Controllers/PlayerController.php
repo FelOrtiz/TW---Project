@@ -4,7 +4,15 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Validator;
 use App\Player;
+use Carbon\Carbon;
+use App\Team;
+use App\Person;
+use App\City;
+use App\GameType;
+use App\PlayerWT;
+
 
 class PlayerController extends Controller
 {
@@ -13,8 +21,44 @@ class PlayerController extends Controller
         $this->middleware('auth');
     }
 
-    public searchTeam()
+    public function searchTeam()
     {
-    	
+    	$people = Person::all(); //para el select
+        $cities = City::all();
+        $gametypes = GameType::all();
+
+        return view('player.searchteam', compact('people','cities','gametypes'));
+    }
+
+    //método que almacena un playerwt en la BD
+    public function store(Request $request)
+    {
+        //validar la petición
+        $validator = Validator::make($request->all(), [
+            'gametype_id' => 'required|numeric',
+            'city_id' => 'required|numeric',
+            'init_hour' => 'required|date_format:H:i',
+        ]);
+
+        //si hay fallo, retornar a la vista con los fallos
+        if ($validator->fails()) 
+        {
+            return redirect('player/searchteam')->withErrors($validator)->withInput();
+        }
+
+        //creamos el equipo
+        PlayerWT::create([
+            'person_id' => auth()->user()->id,
+            'gametype_id' => $request['gametype_id'],
+            'hour' => Carbon::parse('now')->modify($request['init_hour'])
+        ]);
+
+        //si no hay fallo, retornar mensaje de éxito.
+        session()->flash('title', '¡Éxito!');
+        session()->flash('message', 'La busqueda se ha registrado exitosamente, reciviras una notificación si haz sido elegido para algun partido!');
+        session()->flash('icon', 'fa-check');
+        session()->flash('type', 'success');
+
+        return redirect('player/searchteam');        
     }
 }
