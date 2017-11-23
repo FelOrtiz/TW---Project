@@ -92,3 +92,6 @@ Route::post('team/delete/{team}', 'TeamController@delete');
 //Team Players
 Route::get('player/searchteam', 'PlayerController@searchteam');
 Route::post('player', 'PlayerController@store');
+
+//Notification
+Route::post('/isacepted','PlayerController@isAcepted');

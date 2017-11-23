@@ -11,11 +11,11 @@ class Player extends Model
      *
      * @var array
      */
-    protected $fillable = ['person_rut', 'team_id', 'team_responsible'];
+    protected $fillable = ['person_id', 'team_id', 'team_responsible'];
 
     public function team()
     {
-        return $this->belongsTo('App\Team');
+        return $this->belongsTo('App\Team','team_id','id');
     }
 
     public function person()

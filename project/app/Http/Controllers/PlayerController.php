@@ -12,6 +12,7 @@ use App\Person;
 use App\City;
 use App\GameType;
 use App\PlayerWT;
+use App\User;
 
 
 class PlayerController extends Controller
@@ -55,10 +56,29 @@ class PlayerController extends Controller
 
         //si no hay fallo, retornar mensaje de éxito.
         session()->flash('title', '¡Éxito!');
-        session()->flash('message', 'La busqueda se ha registrado exitosamente, reciviras una notificación si haz sido elegido para algun partido!');
+        session()->flash('message', 'La busqueda se ha registrado exitosamente, recibiras una notificación si haz sido elegido para algun partido!');
         session()->flash('icon', 'fa-check');
         session()->flash('type', 'success');
 
         return redirect('player/searchteam');        
+    }
+
+    public function isAcepted()
+    {
+        $session_id =  auth()->user()->id ;
+        $players = Player::all();
+        
+        foreach ($players as $player) {
+            if($player->person_id == $session_id )
+            {
+                $team = Team::find($player->team_id);
+                $person = Person::find($team->responsible_id);
+
+                return response()->json(array('isAcepted' => "Acepted",'Team'=>$person->firstname, 'Hour'=>$team->init_hour));
+            }
+        }
+        
+
+        return response()->json("No");
     }
 }
