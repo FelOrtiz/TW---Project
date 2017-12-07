@@ -17,7 +17,6 @@
 
 	<script type="text/javascript">
 		var ajaxCall=function(){
-			console.log("entro");
 			$.ajax({
 	            type: 'POST',
 	            url:'/isacepted',

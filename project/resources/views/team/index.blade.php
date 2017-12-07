@@ -39,7 +39,7 @@
 					<tbody>
 						@foreach($teams as $team)
 						<tr>
-							<td>{{ $team->gametype->name() }}</td>
+							<td>{{ $team->game_type->name() }}</td>
 							<td>{{ $team->city->name() }}</td>
 
 							@if($team->complete == 0)
@@ -54,7 +54,8 @@
 								<button onclick="delete_team('{{ $team->id }}')" class="btn btn-danger btn-xs">Eliminar</button>
 
 								@if($team->complete == 1)
-									<a href="#" class="btn btn-primary btn-xs" data-toggle="tooltip" title="Equipo completo, ya no se pueden agregar más jugadores." data-placement="right" disabled>Agregar Jugadores</a>
+									<a id="search_opponent" team="{{ $team->id }}" href="#" class="btn btn-success btn-xs">Buscar equipo oponente</a>
+									<a id="cancel_search_opp" href="#" class="btn btn-danger btn-xs hidden">Cancelar búsqueda</a>
 								@else
 									<a href="/team/{{ $team->id}}/players" class="btn btn-primary btn-xs">Agregar Jugadores</a>
 								@endif
@@ -116,6 +117,56 @@
 		$('#form-delete').attr('action', '/team/delete/'+id);
 		$('#DeleteModal').modal('toggle');
 	};
+</script>
+
+<script>
+	var interval = null;
+	var ajaxSearch = function(){
+		$.ajax({
+            type: 'POST',
+            url: "/team/search_opponent",
+            data: {
+                '_token': "{{ csrf_token() }}",
+                'team_id': $('#search_opponent').attr('team'),
+            },
+            success: function(data) 
+            {
+            }
+        }).done(function(data){
+        	console.log(data);
+        });
+	};
+
+	$('#search_opponent').click(function(){
+		$(this).text('Buscando oponente...');
+		$(this).append(' <i class="fa fa-spin fa-refresh"></i>');
+		$(this).addClass('disabled');
+		$('#cancel_search_opp').removeClass('hidden');
+
+		interval = setInterval(ajaxSearch, 5000);
+	});
+
+	$('#cancel_search_opp').click(function(){
+		$('#search_opponent').text('Buscar oponente');
+		$('#search_opponent').removeClass('disabled');
+		$(this).addClass('hidden');
+
+		$.ajax({
+            type: 'POST',
+            url: "/team/cancel_search_opponent",
+            data: {
+                '_token': "{{ csrf_token() }}",
+                'team_id': $('#search_opponent').attr('team'),
+            },
+            success: function(data) 
+            {
+            }
+        }).done(function(data){
+        	console.log(data);
+        });
+
+		clearInterval(interval);
+	});
 </script>
 
 <script>

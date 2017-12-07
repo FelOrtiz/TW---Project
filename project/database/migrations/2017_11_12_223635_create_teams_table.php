@@ -16,10 +16,12 @@ class CreateTeamsTable extends Migration
         Schema::create('teams', function (Blueprint $table) {
             $table->bigIncrements('id')->index();
             $table->bigInteger('responsible_id')->index();
-            $table->bigInteger('gametype_id')->index();
+            $table->bigInteger('game_type_id')->index();
             $table->boolean('complete');
             $table->string('city_id')->index();
             $table->timestamp('init_hour')->nullable()->default(null);
+            $table->boolean('searching');
+            $table->boolean('match_found');
             $table->timestamps();
         });
     }

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
 use App\Team;
 use App\Person;
@@ -12,6 +13,10 @@ use App\City;
 use App\GameType;
 use App\PlayerWT;
 use App\Player;
+use App\Enclosure;
+use App\Match;
+use App\Solicitation;
+use App\Field;
 
 class TeamController extends Controller
 {
@@ -58,7 +63,7 @@ class TeamController extends Controller
         //creamos el equipo
         Team::create([
             'responsible_id' => auth()->user()->id,
-            'gametype_id' => $request['gametype_id'],
+            'game_type_id' => $request['gametype_id'],
             'complete' => 0,
             'city_id' => $request['city_id'],
             'init_hour' => Carbon::parse('now')->modify($request['init_hour'])
@@ -128,13 +133,121 @@ class TeamController extends Controller
         return redirect('team/index');
     }
 
+    public function search_opponent(Request $request)
+    {
+        $team = Team::find($request['team_id']);
+
+        $msg = null;
+        if(!$team->match_found)
+        { 
+            if(!$team->searching)
+            {
+                $team->searching = true;
+                $team->save();
+            }
+
+            $teams = Team::where('searching', true)->where('id', '!=', $team->id)->get();
+            
+
+            foreach ($teams as $opp_team) 
+            {
+                if($opp_team->responsible->city->id == $team->responsible->city->id &&
+                    $opp_team->game_type->id == $team->game_type->id &&
+                    $opp_team->init_hour == $team->init_hour &&
+                    $opp_team->searching && $team->searching)
+                {
+                    //match found!!
+                    //DB::beginTransaction();
+
+                    $team->searching = false;
+                    $team->save();
+                    $opp_team->searching = false;
+                    $opp_team->save();
+
+                    //return \Response::json($opp_team);
+
+                    $enclosures = Enclosure::where('city_id', $team->responsible->city_id)->get();
+
+                    $enclosure = null;
+                    foreach ($enclosures as $enc) 
+                    {
+                        if($enc->fields->count() > 0)
+                        {
+                            $enclosure = $enc;
+                        }
+                    }
+
+                    if($enclosure != null)
+                    {
+                        $field = $enclosure->fields->first();
+
+                        if($field != null)
+                        {
+                            $opp_team->match_found = true;
+                            $opp_team->save();
+
+                            $team->match_found = true;
+                            $team->save();
+
+                            $solicitation = Solicitation::create([
+                                'person_id' => $team->responsible_id,
+                                'field_id' => $field->id,
+                                'init_hour' => $team->init_hour,
+                                'duration' => $team->game_type->duration
+                            ]);
+
+                            Match::create([
+                                'v_team_id' => $opp_team->id,
+                                'l_team_id' => $team->id,
+                                'solicitation_id' => $solicitation->id
+                            ]);
+
+
+                            //DB::commit();
+                            $msg = "Oponente encontrado!";
+                        }
+                        else
+                        {
+                            //DB::rollBack();
+                            $msg = "No existe un campo en el horario y ciudad seleccionados.";
+                        }
+                    }
+                    else
+                    {
+                        //DB::rollBack();
+                        $msg = "No existen canchas en la ciudad seleccionada.";
+                    }
+                }
+                else
+                {
+                    //DB::rollBack();
+                    $msg = "not found";
+                }
+            }
+        }
+        else
+        {
+            $msg = "Solicitud realizada exitosamente.";
+        }
+
+        return \Response::json($msg);
+    }
+
+    public function cancel_search_opponent(Request $request)
+    {
+        $team = Team::find($request['team_id']);
+
+        $team->searching = false;
+        $team->save();
+
+        return \Response::json($team);
+    }
+
     public function search_player(Request $request)
     {
-
         $playerwts = PlayerWT::all();
         $players = array();
         
-
         foreach ($playerwts as $player)
         {
             $person = Person::find($player->person_id);

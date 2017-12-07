@@ -32,17 +32,18 @@
 							<li><a href="/field/index"><i class="fa fa-list"></i> Ver Todas</a></li>
 						</ul>
 					</li>
+					<li class="dropdown">
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown">Tipos de Juego <span class="caret"></span></a>
+						<ul class="dropdown-menu" role="menu">
+							<li><a href="/field/create"><i class="fa fa-plus"></i> Registrar</a></li>
+							<li><a href="/field/index"><i class="fa fa-list"></i> Ver Todas</a></li>
+						</ul>
+					</li>
 					@elseif(\Auth::user()->isPlayer())
 					<li><a href="/team/create">Crear equipo</a></li>
 					<li><a href="/player/searchteam">Buscar equipo</a></li>
+					<li><a href="/team/index">Mis Equipos</a></li>
 					@endif
-					<li class="dropdown">
-						<a href="#" class="dropdown-toggle" data-toggle="dropdown">Acerca de <span class="caret"></span></a>
-						<ul class="dropdown-menu" role="menu">
-							<li><a href="#">Nosotros</a></li>
-							<li><a href="#">Preguntas Frecuentes</a></li>
-						</ul>
-					</li>
 				</ul>
 			</div>
 			<div class="navbar-custom-menu">

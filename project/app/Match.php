@@ -11,7 +11,7 @@ class Match extends Model
      *
      * @var array
      */
-    protected $fillable = ['v_team_id', 'l_team_id', 'request_id'];
+    protected $fillable = ['v_team_id', 'l_team_id', 'solicitation_id'];
 
     public function v_team()
     {
@@ -25,6 +25,6 @@ class Match extends Model
 
     public function request()
     {
-        return $this->hasOne('App\Request', 'id', 'request_id');
+        return $this->hasOne('App\Solicitation', 'id', 'solicitation_id');
     }
 }
