@@ -23,9 +23,9 @@ class Person extends Model
     	return $this->belongsTo('App\City');
     }
 
-    public function requests()
+    public function solicitations()
     {
-        return $this->hasMany('App\Request');
+        return $this->hasMany('App\Solicitation');
     }
 
     public function name()

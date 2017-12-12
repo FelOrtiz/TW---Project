@@ -80,7 +80,7 @@
 				</div>
 				<div class="box-footer">
 					<a href="/" class="btn btn-default btn-flat">Volver</a>
-					<button type="submit" class="btn btn-success btn-flat pull-right">Crea Equipo</button>
+					<button type="submit" class="btn btn-success btn-flat pull-right">Registrar Equipo</button>
 				</div>
 			</form>
 		</div>

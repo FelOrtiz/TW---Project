@@ -63,7 +63,6 @@ Route::post('field/update/{field}', 'FieldController@update');
 Route::post('field/delete/{field}', 'FieldController@delete');
 
 
-
 //FieldType
 Route::get('fieldtype/index', 'FieldTypeController@index');
 Route::get('fieldtype/create','FieldTypeController@create');
@@ -72,10 +71,8 @@ Route::get('fieldtype/{fieldtype}/edit' ,'FieldTypeController@edit');
 Route::post('fieldtype/update/{fieldtype}', 'FieldTypeController@update');
 Route::post('fieldtype/delete/{fieldtype}', 'FieldTypeController@delete');
 
-
 //Request
 Route::get('request/index', 'RequestController@index');
-
 
 //Team
 Route::get('team/index', 'TeamController@index');
@@ -88,6 +85,8 @@ Route::post('/addplayer' ,'TeamController@add_players');
 Route::post('team/update/{team}', 'TeamController@update');
 Route::post('team/delete/{team}', 'TeamController@delete');
 
+Route::post('/team/search_opponent', 'TeamController@search_opponent');
+Route::post('/team/cancel_search_opponent', 'TeamController@cancel_search_opponent');
 
 //Team Players
 Route::get('player/searchteam', 'PlayerController@searchteam');

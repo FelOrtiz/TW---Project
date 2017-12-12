@@ -32,38 +32,36 @@
 				<div class="box-body">
 					<div class="row">
 						<div class="col-md-12">
-							<div class="col-md-12">
-								<div class="form-group has-feedback {{ $errors->has('name') ? 'has-error': '' }}">
-									<label>Nombre</label>
-									<input type="text" class="form-control" placeholder="Ej: futbol 7" name="name">
-									@if ($errors->has('name'))
-									<span class="help-block">
-										<strong>{{ $errors->first('name') }}</strong>
-									</span>
-									@endif
-								</div>
+							<div class="form-group has-feedback {{ $errors->has('name') ? 'has-error': '' }}">
+								<label>Nombre</label>
+								<input type="text" class="form-control" placeholder="Ej: futbol 7" name="name">
+								@if ($errors->has('name'))
+								<span class="help-block">
+									<strong>{{ $errors->first('name') }}</strong>
+								</span>
+								@endif
 							</div>
-							<div class="col-md-3">
-								<div class="form-group has-feedback {{ $errors->has('capacity') ? 'has-error': '' }}">
-									<label>Capacidad</label>
-									<input type="number" class="form-control" name="capacity" min="1" max="30">
-									@if ($errors->has('capacity'))
-									<span class="help-block">
-										<strong>{{ $errors->first('capacity') }}</strong>
-									</span>
-									@endif
-								</div>
+						</div>
+						<div class="col-md-6">
+							<div class="form-group has-feedback {{ $errors->has('capacity') ? 'has-error': '' }}">
+								<label>Capacidad</label>
+								<input type="number" class="form-control" name="capacity" min="1" max="30">
+								@if ($errors->has('capacity'))
+								<span class="help-block">
+									<strong>{{ $errors->first('capacity') }}</strong>
+								</span>
+								@endif
 							</div>
-							<div class="col-md-3">
-								<div class="form-group has-feedback {{ $errors->has('duration') ? 'has-error': '' }}">
-									<label>Duración <small>(En horas)</small></label>
-									<input type="number" class="form-control" name="duration" min="1" max="12">
-									@if ($errors->has('duration'))
-									<span class="help-block">
-										<strong>{{ $errors->first('duration') }}</strong>
-									</span>
-									@endif
-								</div>
+						</div>
+						<div class="col-md-6">
+							<div class="form-group has-feedback {{ $errors->has('duration') ? 'has-error': '' }}">
+								<label>Duración <small>(En horas)</small></label>
+								<input type="number" class="form-control" name="duration" min="1" max="12">
+								@if ($errors->has('duration'))
+								<span class="help-block">
+									<strong>{{ $errors->first('duration') }}</strong>
+								</span>
+								@endif
 							</div>
 						</div>
 					</div>
