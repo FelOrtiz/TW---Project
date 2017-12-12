@@ -92,7 +92,6 @@
 <script>
 	$('#init_date').datepicker(
 	{
-		minDate: new Date(2017,12,12),
 		format: 'yyyy-mm-dd'
 	});	
 </script>
