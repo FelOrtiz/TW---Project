@@ -61,12 +61,21 @@ class TeamController extends Controller
         }
 
         //creamos el equipo
+        $date = $request['init_date'];
+        $hour = $request['init_hour'];
+        $finaldate = $date.' '.$hour;
         Team::create([
             'responsible_id' => auth()->user()->id,
             'game_type_id' => $request['gametype_id'],
             'complete' => 0,
             'city_id' => $request['city_id'],
+<<<<<<< HEAD
             'init_hour' => Carbon::parse('now')->modify($request['init_hour'])
+=======
+            'init_hour' => $finaldate
+            'searching' => false,
+            'match_found' => false,
+>>>>>>> b58c72cef29313d5d3a3782e4a8f32b7aa708d75
         ]);
 
         //si no hay fallo, retornar mensaje de éxito.
@@ -268,13 +277,13 @@ class TeamController extends Controller
     {
         $gametype = GameType::find($request->gametype_id);
         $players = Player::where('team_id',"=",$request->team_id)->get();
-        $capacity = ($gametype->capacity)/2 ;
+        $capacity = (($gametype->capacity)/2)-1 ;
 
         if (sizeof($players) < $capacity ){
             
             //agregar a mi equipo
             Player::create([
-                'person_rut' => $request->player_id,
+                'person_id' => $request->player_id,
                 'team_id' => $request->team_id,
                 'team_responsible' => $request->team_responsible
                 

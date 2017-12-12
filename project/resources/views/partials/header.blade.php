@@ -49,25 +49,24 @@
 			<div class="navbar-custom-menu">
 				<ul class="nav navbar-nav">
 
-					<li class="dropdown notifications-menu">
+					<!-- Seccion de la notificacion -->
+					<li class="dropdown notifications-menu" >
 						<a href="#" class="dropdown-toggle" data-toggle="dropdown">
 							<i class="fa fa-bell-o"></i>
-							<span class="label label-warning">10</span>
+							<span class="label label-danger" id="count_Notificaction"></span>
 						</a>
 						<ul class="dropdown-menu">
-							<li class="header">Tu Tienes 10 Solicitudes</li>
+							<li class="header">Notificaciones</li>
 							<li>
-								<ul class="menu">
-									<li>
-										<a href="#">
-											<i class="fa fa-users text-aqua"></i> Cancha 1
-										</a>
-									</li>
+								<ul class="menu" id="Menu_Noti">
+									
 								</ul>
 							</li>
 							<li class="footer"><a href="solicitation/index">Ver Todas</a></li>
 						</ul>
 					</li>
+
+
 					<li class="dropdown notifications-menu">
 						<a href="#" class="dropdown-toggle" data-toggle="dropdown">
 							<i class="fa fa-user" style="margin-right: 5px;"></i> {{ \Auth::user()->person->name() }}

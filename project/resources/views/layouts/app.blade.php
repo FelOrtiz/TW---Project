@@ -15,33 +15,7 @@
 	@include('partials.scripts')
 	@yield('script')
 
-	<script type="text/javascript">
-		var ajaxCall=function(){
-			$.ajax({
-	            type: 'POST',
-	            url:'/isacepted',
-	            data: {
-                '_token':"{{ csrf_token() }}",
-            	},
-	            success: function(data) {
-	                if(data.isAcepted == "Acepted"){
-	                	$('#modalinfo .modal-body #parrafo').text("Haz sido seleccionado por "+ data.Team +", fecha: "+ data.Hour);
-        				$('#modalinfo').modal('show');
-	                }
 
-	            },
-			    error: function (result) {
-			        
-			    }
-	        });
-	     }
-	    interval = setInterval(ajaxCall,10000);
-
-		function stopfunction(){
-			clearInterval(interval);
-		};
-
-	</script>
 
 	<!-- Modal -->
 	<div class="modal fade" id="modalinfo" role="dialog">
@@ -62,6 +36,7 @@
 
 		</div>
 	</div>
+
 
 </body>
 </html>
