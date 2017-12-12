@@ -69,13 +69,9 @@ class TeamController extends Controller
             'game_type_id' => $request['gametype_id'],
             'complete' => 0,
             'city_id' => $request['city_id'],
-<<<<<<< HEAD
-            'init_hour' => Carbon::parse('now')->modify($request['init_hour'])
-=======
             'init_hour' => $finaldate
             'searching' => false,
             'match_found' => false,
->>>>>>> b58c72cef29313d5d3a3782e4a8f32b7aa708d75
         ]);
 
         //si no hay fallo, retornar mensaje de éxito.
