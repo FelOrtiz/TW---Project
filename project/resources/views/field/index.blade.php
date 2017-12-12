@@ -51,6 +51,7 @@
 							<td>
 								<a href="/field/{{ $field->id }}/edit" class="btn btn-warning btn-xs">Editar</a>
 								<button onclick="delete_enc('{{ $field->id }}')" class="btn btn-danger btn-xs">Eliminar</button>
+								<a href="/field/{{ $field->id }}/calendar" class="btn btn-info btn-xs">Ver calendarización</a>
 							</td>
 						</tr>
 						@endforeach

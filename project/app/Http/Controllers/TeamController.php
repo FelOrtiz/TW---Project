@@ -66,9 +66,7 @@ class TeamController extends Controller
             'game_type_id' => $request['gametype_id'],
             'complete' => 0,
             'city_id' => $request['city_id'],
-            'init_hour' => Carbon::parse('now')->modify($request['init_hour']),
-            'searching' => false,
-            'match_found' => false,
+            'init_hour' => Carbon::parse('now')->modify($request['init_hour'])
         ]);
 
         //si no hay fallo, retornar mensaje de éxito.
@@ -139,7 +137,7 @@ class TeamController extends Controller
     {
         $team = Team::find($request['team_id']);
 
-        $msg = array();
+        $msg = null;
         if(!$team->match_found)
         { 
             if(!$team->searching)
@@ -158,11 +156,15 @@ class TeamController extends Controller
                     $opp_team->init_hour == $team->init_hour &&
                     $opp_team->searching && $team->searching)
                 {
+                    //match found!!
+                    //DB::beginTransaction();
 
                     $team->searching = false;
                     $team->save();
                     $opp_team->searching = false;
                     $opp_team->save();
+
+                    //return \Response::json($opp_team);
 
                     $enclosures = Enclosure::where('city_id', $team->responsible->city_id)->get();
 
@@ -200,33 +202,32 @@ class TeamController extends Controller
                                 'solicitation_id' => $solicitation->id
                             ]);
 
-                            $msg['msg'] = "Oponente encontrado!";
-                            $msg['type'] = "success";
+
+                            //DB::commit();
+                            $msg = "Oponente encontrado!";
                         }
                         else
                         {
-                            $msg['msg'] = "No existe un campo en el horario y ciudad seleccionados.";
-                            $msg['type'] = "warning";
+                            //DB::rollBack();
+                            $msg = "No existe un campo en el horario y ciudad seleccionados.";
                         }
                     }
                     else
                     {
                         //DB::rollBack();
-                        $msg['msg'] = "No existen canchas en la ciudad seleccionada.";
-                        $msg['type'] = "warning";
+                        $msg = "No existen canchas en la ciudad seleccionada.";
                     }
                 }
                 else
                 {
-                    $msg['msg']= "No existe un equipo bajo el mismo criterio.";
-                    $msg['type'] = "warning";
+                    //DB::rollBack();
+                    $msg = "not found";
                 }
             }
         }
         else
         {
-            $msg['msg'] = "Solicitud realizada exitosamente.";
-            $msg['type'] = "success";
+            $msg = "Solicitud realizada exitosamente.";
         }
 
         return \Response::json($msg);

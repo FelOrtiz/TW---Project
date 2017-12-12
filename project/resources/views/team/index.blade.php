@@ -43,9 +43,9 @@
 							<td>{{ $team->city->name() }}</td>
 
 							@if($team->complete == 0)
-								<td> Incompleto </td>
+								<td> incompleto </td>
 							@else
-								<td> Completo </td>
+								<td> completo </td>
 							@endif
 
 							<td>{{ ucfirst($team->init_hour)}}</td>
@@ -53,9 +53,7 @@
 								<a href="/team/{{ $team->id }}/edit" class="btn btn-warning btn-xs">Editar</a>
 								<button onclick="delete_team('{{ $team->id }}')" class="btn btn-danger btn-xs">Eliminar</button>
 
-								@if($team->match_found)
-									<a id="match_found" class="btn btn-xs btn-primary">Ver reserva</a>
-								@elseif($team->complete)
+								@if($team->complete == 1)
 									<a id="search_opponent" team="{{ $team->id }}" href="#" class="btn btn-success btn-xs">Buscar equipo oponente</a>
 									<a id="cancel_search_opp" href="#" class="btn btn-danger btn-xs hidden">Cancelar búsqueda</a>
 								@else
@@ -135,25 +133,7 @@
             {
             }
         }).done(function(data){
-        	if(data != null)
-        	{
-        		clearInterval(interval);
-
-        		$('#search_opponent').text('Buscar equipo oponente');
-
-        		if(data.type == 'success')
-        		{
-        			$('#search_opponent').text('Ver reserva');
-        			$('#search_opponent').attr('href', '/');
-        			$('#search_opponent').removeClass('btn-success');
-        			$('#search_opponent').removeClass('disabled');
-        			$('#search_opponent').addClass('btn-primary');
-        		}
-        		
-        		$('#cancel_search_opp').addClass('hidden');
-
-        		console.log(data);
-        	}
+        	console.log(data);
         });
 	};
 

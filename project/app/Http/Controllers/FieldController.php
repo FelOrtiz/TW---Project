@@ -10,6 +10,7 @@ use App\Field;
 use App\Enclosure;
 use App\FieldType;
 use Carbon\Carbon;
+use App\Solicitation;
 
 class FieldController extends Controller
 {
@@ -122,4 +123,24 @@ class FieldController extends Controller
         return redirect('field/index');
     }
 
+    public function show_calendar(Field $field)
+    {        
+        return view('field.calendar', compact('field'));
+    }
+
+    public function show_schedule(Request $request)
+    {        
+        $solicitations = Solicitation::where('field_id', '=', $request->field)->get();
+        $response = array();
+        foreach ($solicitations as $solicitation) 
+        {
+            $object = array(
+                'title' => $solicitation->person->name(),
+                'start' => $solicitation->init_hour
+            );
+            array_push($response, $object);
+        }
+
+        return Response()->json($response);
+    }
 }

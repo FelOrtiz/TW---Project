@@ -35,8 +35,8 @@
 					<li class="dropdown">
 						<a href="#" class="dropdown-toggle" data-toggle="dropdown">Tipos de Juego <span class="caret"></span></a>
 						<ul class="dropdown-menu" role="menu">
-							<li><a href="/field/create"><i class="fa fa-plus"></i> Registrar</a></li>
-							<li><a href="/field/index"><i class="fa fa-list"></i> Ver Todas</a></li>
+							<li><a href="/gametype/create"><i class="fa fa-plus"></i> Registrar</a></li>
+							<li><a href="/gametype/index"><i class="fa fa-list"></i> Ver Todas</a></li>
 						</ul>
 					</li>
 					@elseif(\Auth::user()->isPlayer())

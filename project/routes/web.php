@@ -61,7 +61,8 @@ Route::post('field', 'FieldController@store');
 Route::get('field/{field}/edit', 'FieldController@edit');
 Route::post('field/update/{field}', 'FieldController@update');
 Route::post('field/delete/{field}', 'FieldController@delete');
-
+Route::get('field/{field}/calendar', 'FieldController@show_calendar');
+Route::post('field/schedules', 'FieldController@show_schedule');
 
 //FieldType
 Route::get('fieldtype/index', 'FieldTypeController@index');
