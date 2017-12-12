@@ -48,10 +48,13 @@ class PlayerController extends Controller
         }
 
         //creamos el equipo
+        $date = $request['init_date'];
+        $hour = $request['init_hour'];
+        $finaldate = $date.' '.$hour;
         PlayerWT::create([
             'person_id' => auth()->user()->id,
             'gametype_id' => $request['gametype_id'],
-            'hour' => Carbon::parse('now')->modify($request['init_hour'])
+            'hour' => $finaldate
         ]);
 
         //si no hay fallo, retornar mensaje de éxito.
@@ -67,18 +70,22 @@ class PlayerController extends Controller
     {
         $session_id =  auth()->user()->id ;
         $players = Player::all();
-        
+        $notifications = array();
+
         foreach ($players as $player) {
             if($player->person_id == $session_id )
             {
                 $team = Team::find($player->team_id);
                 $person = Person::find($team->responsible_id);
-
-                return response()->json(array('isAcepted' => "Acepted",'Team'=>$person->firstname, 'Hour'=>$team->init_hour));
+                //enviar lista de aceptacion en equipo :D
+                array_push($notifications,$team);   
             }
         }
-        
 
-        return response()->json("No");
+        $size = sizeof($notifications);
+        $returnHTML = view('partials.listnotifications')->with('Notifications',$notifications)->render();
+        return response()->json(array('success'=>true, 'html'=>$returnHTML,'size'=>$size));
+        //return response()->json(array('Notifications'=>$notifications));
+        
     }
 }

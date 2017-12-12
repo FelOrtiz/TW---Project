@@ -57,9 +57,18 @@
 								</span>
 								@endif
 							</div>
-							<div class="form-group has-feedback {{ $errors->has('init_hour') ? 'has-error': '' }}">
+							<div class="form-group has-feedback {{ $errors->has('init_date') ? 'has-error': '' }}">
 								<label>Fecha</label>
-								<input type="time"class="form-control" name="init_hour">
+								<input type="text" class="form-control" name="init_date" id="init_date">
+								@if ($errors->has('init_date'))
+								<span class="help-block">
+									<strong>{{ $errors->first('init_date') }}</strong>
+								</span>
+								@endif
+							</div>
+							<div class="form-group has-feedback {{ $errors->has('init_hour') ? 'has-error': '' }}">
+								<label>Hora</label>
+								<input type="time" class="form-control" name="init_hour" id="init_hour">
 								@if ($errors->has('init_hour'))
 								<span class="help-block">
 									<strong>{{ $errors->first('init_hour') }}</strong>
@@ -77,4 +86,14 @@
 		</div>
 	</section>
 </div>
+@endsection
+
+@section('script')
+<script>
+	$('#init_date').datepicker(
+	{
+		minDate: new Date(2017,12,12),
+		format: 'yyyy-mm-dd'
+	});	
+</script>
 @endsection
