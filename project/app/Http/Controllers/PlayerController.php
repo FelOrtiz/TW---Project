@@ -13,6 +13,7 @@ use App\City;
 use App\GameType;
 use App\PlayerWT;
 use App\User;
+use App\Notification;
 
 
 class PlayerController extends Controller
@@ -66,19 +67,20 @@ class PlayerController extends Controller
     public function isAcepted()
     {
         $session_id =  auth()->user()->id ;
-        $players = Player::all();
-        
-        foreach ($players as $player) {
-            if($player->person_id == $session_id )
-            {
-                $team = Team::find($player->team_id);
-                $person = Person::find($team->responsible_id);
+        $notis = Notification::all();
+        $notifications = array();
 
-                return response()->json(array('isAcepted' => "Acepted",'Team'=>$person->firstname, 'Hour'=>$team->init_hour));
+        foreach ($notis as $notification) {
+            if($notification->person_id == $session_id && $notification->viewed == 0)
+            {
+                array_push($notifications,$notification);   
             }
         }
-        
 
-        return response()->json("No");
+        $size = sizeof($notifications);
+        $returnHTML = view('partials.listnotifications')->with('Notifications',$notifications)->render();
+        return response()->json(array('success'=>true, 'html'=>$returnHTML,'size'=>$size));
+        //return response()->json(array('Notifications'=>$notifications));
+        
     }
 }

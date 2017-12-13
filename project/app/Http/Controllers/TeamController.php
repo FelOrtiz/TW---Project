@@ -17,6 +17,7 @@ use App\Enclosure;
 use App\Match;
 use App\Solicitation;
 use App\Field;
+use App\Notification;
 
 class TeamController extends Controller
 {
@@ -280,7 +281,15 @@ class TeamController extends Controller
             ]);
 
             //notificar al jugador que fue agregado al equipo.....
-
+            $team = Team::find($request->team_id);
+            $date = $team->init_hour;
+            $responsible = Person::find($team->responsible_id);
+            $info = 'Fuiste seleccionado por '.$responsible->name().' para jugar en la fecha y hora siguiente '.$date;
+            Notification::create([
+                'info' => $info,
+                'person_id' => $reques->player_id,
+                'team_id' => $request->team_id
+            ]);
 
             //eliminar de tabla player_wts
             $player_wt = PlayerWT::where('person_id',"=",$request->player_id)->delete();
