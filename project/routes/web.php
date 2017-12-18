@@ -95,3 +95,6 @@ Route::post('player', 'PlayerController@store');
 
 //Notification
 Route::post('/isacepted','PlayerController@isAcepted');
+Route::get('notification/index', 'NotificationController@index');
+Route::post('/updateNotificaction' ,'NotificationController@update');
+Route::post('/viewNotificaction' ,'NotificationController@view');
